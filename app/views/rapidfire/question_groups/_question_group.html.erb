@@ -1,0 +1,20 @@
+<tr id= "question_group_<%= question_group.id %>">
+  <td>
+    <% if can_administer? %>
+     글 제목 <%= link_to question_group.name, new_question_group_answer_group_path(question_group)  %>
+      작성자 <%= question_group.writer %>
+    <% else %>
+      <%= question_group.name %>
+      
+    <% end %>
+  </td>
+  <td>
+    <ul class="horizontal-list">
+     
+      <% if can_administer? %>
+        <li><%= link_to "Results", [:results, question_group] %></li>
+        <li><%= link_to "Delete", [question_group], method: :delete %></li>
+      <% end %>
+    </ul>
+  </td>
+</tr>

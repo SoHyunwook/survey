@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+    <a href="/rapidfire">메인으로 가기</a>
+    <%= link_to "로그아웃", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% else %>
+    <a href="/users/sign_in">로그인</a>
+    <a href="/users/sign_up">회원가입</a>
+    <a href="/rapidfire">rapidfire 메인으로 가기</a>
+<% end %>
+<br>
+<br>
+<hr>
+<% if user_signed_in? %>
+    <%= current_user.email %>
+<br>
+    <%= current_user.school %>
+<br>
+    point : <%= current_user.point %>
+    postnum : <%= current_user.postnum %>
+    submitnum : <%= current_user.submitnum %>
+<% end %>
