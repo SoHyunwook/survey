@@ -1,37 +1,46 @@
-<h2>
-  새 설문조사 쓰기<br>
-  <% if can_administer? %>
-    <%= link_to "설문 조사 제목 쓰기", new_question_group_path %>
-  <% end %>
-</h2>
-<% if user_signed_in? %>
-  <div align="right">
-    이름 : <%= current_user.username %>
-    <br>
-    이메일 :  <%= current_user.email %>
-    <br>
-    point : <%= current_user.point %>
-    postnum : <%= current_user.postnum %>
-    submitnum : <%= current_user.submitnum %>
-    <br>
-   <a href="/users/sign_out">로그아웃</a>
-  </div>
-<% end %>
-<hr/>
 
-<table>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>설문 조사 게시글</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "question_group", collection: @question_groups %>
+
+<div class="container">
+  <h2>
+    새 설문조사 쓰기<br>
+    <% if can_administer? %>
+      <%= link_to "설문 조사 제목 쓰기", new_question_group_path %>
+    <% end %>
+  </h2>
+  <% if user_signed_in? %>
+    <div align="right">
+      이름 : <%= current_user.username %>
+      <br>
+      이메일 :  <%= current_user.email %>
+      <br>
+      point : <%= current_user.point %>
+      postnum : <%= current_user.postnum %>
+      submitnum : <%= current_user.submitnum %>
+      <br>
+     <a href="/users/sign_out">로그아웃</a>
+    </div>
+  <% end %>
+  <hr/>
   
-  </tbody>
-</table>
+  <table class="table table-bordered">
+    <colgroup>
+      <col width="50">
+      <col width="250">
+      <col width="100">
+      <col width="100">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>글번호</th>
+        <th>글제목</th>
+        <th>작성자</th>
+        <th>작성시간</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "question_group", collection: @question_groups %>
+    
+    </tbody>
+  </table>
+  <a href="/rapidfire/question_groups/new" class="btn btn-primary btn-lg" role="button" style="float: right;">글쓰기</a>
+</div>

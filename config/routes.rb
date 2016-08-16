@@ -1,23 +1,18 @@
 Rails.application.routes.draw do
-  
-  get 'board/index'
-
-  get 'board/postpage'
-
-  get 'board/write'
-
-  get 'board/create'
-
-  get 'board/edit'
-
-  get 'board/real_edit'
-
-  get 'board/destroy'
 
   mount Rapidfire::Engine => "/rapidfire"
    
   get 'home/index'
-  root 'home#index'
+ 
+  devise_scope :user do
+      authenticated :user do
+        root 'home#index', as: :authenticated_root
+      end
+
+      unauthenticated do
+        root 'devise/sessions#new', as: :unauthenticated_root
+      end
+  end
   # devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :users, controllers: {
     sessions: 'users/sessions',
