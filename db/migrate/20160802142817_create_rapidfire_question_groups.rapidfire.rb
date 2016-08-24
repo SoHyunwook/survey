@@ -2,9 +2,11 @@
 class CreateRapidfireQuestionGroups < ActiveRecord::Migration
   def change
     create_table :rapidfire_question_groups do |t|
+      
+      t.integer :user_id #user와 연결하는 FK
+      
       t.string  :name
       t.string  :writer
-      # t.integer :user_id
 
       t.timestamps
     end

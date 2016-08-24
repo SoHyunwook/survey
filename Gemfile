@@ -1,7 +1,14 @@
 source 'https://rubygems.org'
-
+gem "chartkick"
+gem 'will_paginate-bootstrap'
+gem 'will_paginate', '~> 3.0.5'
 gem 'devise'
 gem 'rapidfire'
+
+gem 'simple_form'
+gem 'ejs'
+gem 'chart-js-rails'
+# gem 'chartjs-ror'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
@@ -18,7 +25,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -44,5 +51,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  gem 'pry-remote', '~> 0.1.7'
+  gem 'quiet_assets'
 end
 

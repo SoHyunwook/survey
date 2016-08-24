@@ -1,39 +1,26 @@
-<tr id= "question_group_<%= question_group.id %>">
-  <colgroup>
-    <col width="50">
-    <col width="250">
-    <col width="100">
-    <col width="100">
-  </colgroup>
-  
-    <% if can_administer? %>
+
+  <% if can_administer? %>
       <th><%= question_group.id%></th>
-      <th><%= link_to question_group.name, new_question_group_answer_group_path(question_group) %></th>
+      <% if current_user.id == question_group.user_id %>
+        <th><%= link_to question_group.name, question_group_questions_path(question_group)   %></th>
+      
+      <% end %>
       <th><%= question_group.writer %></th>
-     
-      <th><%= question_group.created_at.strftime("%Y-%m-%d") %></th>
-      
-      
-      <!--line11:응답하는 곳으로, line17:문제생성하는 곳으로 가는 코드
-      <%= link_to question_group.name, question_group_questions_path(question_group)  %>
-      -->
-      
+      <th><%= question_group.created_at.in_time_zone("Asia/Seoul").strftime("%Y-%m-%d %H:%M") %></th>
+      <th>
+        <ul class="horizontal-list">
+           <% if current_user.id == question_group.user_id %>
+            <% if can_administer? %>
+            <li><%= link_to "Results", [:results, question_group] %></li>
+            <li><%= link_to "Delete", [question_group], method: :delete %></li>
+          <% end %>
+          <% else %>
+          <li><%= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %></li>
+          </ul>
+          <% end %>
+    </th>
       
     <% else %>
       <%= question_group.name %>
       
     <% end %>
-
-  
-  <!--
-  <td>
-    <ul class="horizontal-list">
-      <% if can_administer? %>
-        <li><%= link_to "Results", [:results, question_group] %></li>
-        <li><%= link_to "Delete", [question_group], method: :delete %></li>
-      <% end %>
-    </ul>
-  </td>
-  -->
-  
-</tr>

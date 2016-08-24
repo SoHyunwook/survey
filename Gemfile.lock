@@ -44,6 +44,10 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
+    chart-js-rails (0.1.0)
+      railties (> 3.1)
+    chartkick (2.0.2)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -59,6 +63,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.7.0)
     globalid (0.3.6)
@@ -76,6 +81,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -87,6 +93,15 @@ GEM
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
     pkg-config (1.1.7)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -132,6 +147,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
+    slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.2)
       concurrent-ruby (~> 1.0)
@@ -144,9 +163,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (5.0.0)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -158,25 +174,35 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
+  chart-js-rails
+  chartkick
   coffee-rails (~> 4.1.0)
   devise
+  ejs
   jbuilder (~> 2.0)
   jquery-rails
+  pry-remote (~> 0.1.7)
+  quiet_assets
   rails (= 4.2.5)
   rapidfire
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   sqlite3
-  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  will_paginate (~> 3.0.5)
+  will_paginate-bootstrap
 
 BUNDLED WITH
    1.12.5

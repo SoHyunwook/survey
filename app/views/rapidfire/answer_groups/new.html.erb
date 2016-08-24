@@ -1,3 +1,4 @@
+
 <h2>응답하기</h2>
 <hr/>
 
@@ -7,5 +8,9 @@
       <%= render_answer_form_helper(answer, answer_form) %><br>
     <% end %>
   <% end %>
-  <%= f.submit "Save" %>
+  <br>
+  
+  <%= f.submit '결과 저장',:class => "btn btn-primary" %>
+  <a href="/" class="btn btn-default" role="button">뒤로 가기</a>
+  
 <% end %>

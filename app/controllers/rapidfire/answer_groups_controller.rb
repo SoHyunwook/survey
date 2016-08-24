@@ -5,6 +5,10 @@ module Rapidfire
       @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
     end
     def create
+      @userinfo = User.find_by_id(current_user.id)
+      @userinfo.point += 10
+      @userinfo.submitnum += 1
+      @userinfo.save
       @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
       if @answer_group_builder.save
         redirect_to question_groups_path
@@ -12,6 +16,7 @@ module Rapidfire
         render :new
       end
     end
+    
     private
     def find_question_group!
       @question_group = QuestionGroup.find(params[:question_group_id])

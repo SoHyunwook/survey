@@ -13,12 +13,17 @@
   <div class="input-field col s6">
     <%= f.label :name %>
     <%= f.text_field :name %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :writer, :value => current_user.username %>
   </div>
+ 
   
-  <%= f.submit :class => "btn waves-effect waves-light" %>
-
+  <%= f.submit 'new title',:class => "btn btn-primary" %>
+  <a href="/" class="btn btn-default" role="button">뒤로 가기</a>
 
  
 <% end %>
+
+
+
 

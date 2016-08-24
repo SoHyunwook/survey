@@ -1,46 +1,96 @@
-
-
 <div class="container">
-  <h2>
-    새 설문조사 쓰기<br>
-    <% if can_administer? %>
-      <%= link_to "설문 조사 제목 쓰기", new_question_group_path %>
-    <% end %>
-  </h2>
+
   <% if user_signed_in? %>
     <div align="right">
-      이름 : <%= current_user.username %>
+      <table>
+        <tr> <td>이름 : <%= current_user.username %> </td></tr>
+        <tr> <td> 이메일 :  <%= current_user.email %> </td></tr>
+        <tr> <td> 포인트 : <%= current_user.point %> </td></tr>
+        <tr> <td> 설문 : <%= current_user.postnum %>회 등록  |   
+       <%= current_user.submitnum %>회 참여 </td></tr>
+      </table>
       <br>
-      이메일 :  <%= current_user.email %>
+      < 내 설문목록 >
       <br>
-      point : <%= current_user.point %>
-      postnum : <%= current_user.postnum %>
-      submitnum : <%= current_user.submitnum %>
-      <br>
-     <a href="/users/sign_out">로그아웃</a>
+      <% if @my_question_groups.empty? %> 
+        <span> 설문이 없습니다! </span>
+      <% else %>
+        <% @my_question_groups.each do |p| %>
+           <%= p.name %> <br>
+        <% end %>
+      <% end %>
+    
+
     </div>
   <% end %>
   <hr/>
   
-  <table class="table table-bordered">
-    <colgroup>
-      <col width="50">
-      <col width="250">
-      <col width="100">
-      <col width="100">
-    </colgroup>
+  <table class="table table-condensed table-hover">
+   <colgroup>
+    <col width="70">
+    <col width="200">
+    <col width="80">
+    <col width="80">
+    <col width="80">
+   </colgroup>
     <thead>
-      <tr>
+      <tr class="info">
         <th>글번호</th>
         <th>글제목</th>
         <th>작성자</th>
         <th>작성시간</th>
+        <th>응답 및 질문 추가</th>
       </tr>
     </thead>
-    <tbody>
-      <%= render partial: "question_group", collection: @question_groups %>
+  <tbody>
+      
+    <colgroup>
+    <col width="70">
+    <col width="200">
+    <col width="80">
+    <col width="80">
+    <col width="80">
+    </colgroup>
+  
+    <% @posts.each do |question_group| %>
+
+    <% if can_administer? %>
+      <td><%= question_group.id%></td>
+      <td><%= question_group.name%></td>
+      <td><%= question_group.writer %></td>
+      <td><%= question_group.created_at.in_time_zone("Asia/Seoul").strftime("%Y-%m-%d %H:%M") %></td>
+      <td>
+        <ul class="horizontal-list">
+           <% if current_user.id == question_group.user_id %>
+            <% if can_administer? %>
+            <li><%= link_to "질문 추가",question_group_questions_path(question_group) %></li>
+            <li><%= link_to "Results", [:results, question_group] %></li>
+            <li><%= link_to "Delete", [question_group], method: :delete %></li>
+          <% end %>
+          <% else %>
+          <%= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %>
+          </ul>
+          <% end %>
+      </td>
+      
+    <% else %>
+      <%= question_group.name %>
+      
+    <% end %>
     
+   
+
     </tbody>
+     <% end %>
   </table>
-  <a href="/rapidfire/question_groups/new" class="btn btn-primary btn-lg" role="button" style="float: right;">글쓰기</a>
+  
+  <a href="/rapidfire/question_groups/new" class="btn btn-primary" role="button" style="float: right;">글쓰기</a>
+<br><br><br>
+
+<div class="text-center">
+ <nav aria-label="...">
+   <%= will_paginate @posts%>
+ </nav>
+ </div>
+
 </div>

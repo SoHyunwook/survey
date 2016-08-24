@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160802142820) do
   add_index "rapidfire_answers", ["question_id"], name: "index_rapidfire_answers_on_question_id"
 
   create_table "rapidfire_question_groups", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.string   "writer"
     t.datetime "created_at"

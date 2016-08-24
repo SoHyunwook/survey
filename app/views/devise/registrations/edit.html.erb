@@ -1,3 +1,4 @@
+<div class="container">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -36,13 +37,20 @@
     <%= f.text_field :school, autocomplete: "off" %>
   </div> 
   
+   <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autocomplete: "off" %>
+  </div> 
+  
+  <br>
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<hr>
+계정을 삭제하시겠습니까?
+<p><%= button_to "탈퇴하기", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+</div>
