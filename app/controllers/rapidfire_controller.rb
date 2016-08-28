@@ -1,6 +1,3 @@
 class RapidfireController < ApplicationController
  
- 
- 
- 
 end

@@ -9,19 +9,39 @@
         <tr> <td> 설문 : <%= current_user.postnum %>회 등록  |   
        <%= current_user.submitnum %>회 참여 </td></tr>
       </table>
-      <br>
-      < 내 설문목록 >
-      <br>
-      <% if @my_question_groups.empty? %> 
-        <span> 설문이 없습니다! </span>
-      <% else %>
-        <% @my_question_groups.each do |p| %>
-           <%= p.name %> <br>
-        <% end %>
-      <% end %>
-    
 
+      <br>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+             내 설문목록<span class="caret"></span>
+          </button>
+         <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% if @my_question_groups.empty? %> 
+            <li>설문이 없습니다!</li>
+          <% else %>
+            <% @my_question_groups.each do |p| %>
+              <li><a href="/rapidfire/question_groups/<%= p.id %>/results"><%= p.name %></a> </li>
+     	      <% end %>
+     	    <% end %>
+     		 </ul> 
     </div>
+    
+    <br>
+      <div class="input-group-btn">
+     		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+             내가 참여한 설문<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% @my_answer_groups.each do |p| %>
+         	  <% @question_groups.each do |l| %>
+         	    <% if l.id == p.question_group_id %>
+         	      <li><a href="/rapidfire/question_groups/<%= l.id %>/results"><%= l.name %></a></li>
+         	    <% end %>
+         	  <% end %>
+           <% end %>
+     		</ul> 
+     	</div>
+     		 
   <% end %>
   <hr/>
   
@@ -61,14 +81,14 @@
       <td><%= question_group.created_at.in_time_zone("Asia/Seoul").strftime("%Y-%m-%d %H:%M") %></td>
       <td>
         <ul class="horizontal-list">
-           <% if current_user.id == question_group.user_id %>
+          <% if current_user.id == question_group.user_id %>
             <% if can_administer? %>
             <li><%= link_to "질문 추가",question_group_questions_path(question_group) %></li>
-            <li><%= link_to "Results", [:results, question_group] %></li>
-            <li><%= link_to "Delete", [question_group], method: :delete %></li>
-          <% end %>
+            <li><%= link_to "결과 확인", [:results, question_group] %></li>
+            <li><%= link_to "설문 삭제", [question_group], method: :delete %></li>
+            <% end %>
           <% else %>
-          <%= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %>
+            <%= link_to "설문 응답 하기", new_question_group_answer_group_path(question_group) %>
           </ul>
           <% end %>
       </td>
@@ -87,10 +107,37 @@
   <a href="/rapidfire/question_groups/new" class="btn btn-primary" role="button" style="float: right;">글쓰기</a>
 <br><br><br>
 
-<div class="text-center">
- <nav aria-label="...">
-   <%= will_paginate @posts%>
+<div>
+ <nav aria-label="..." class="flickr_pagination">
+   <%= will_paginate @posts %>
  </nav>
- </div>
+</div>
+
+
+<footer class="page-footer" style="opacity: 0.5; marrgin-top:15px;">
+  <div class="container">
+    <h6 class="black-text" style="padding-bottom: 20px; font-size:13px; line-height: 1.5em;">
+               품앗이    |    멋쟁이 사자처럼 2016 4th Hackathon
+        <br>멋쟁이 사자처럼 4기 박정은 소현욱 정여진 정유진<br>
+        <br>메일 : <a href="mailto:mail">email</a>
+
+  </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <h6 class="grey-text text-base" style="margin-bottom: 10px; font-size:12px;">
+        © 2016 Copyright 품앗이, All rights reserved.</h6>
+      </div>
+    </div>
+  
+
+  <!--자바스크립트-->
+  <script>
+    $( document ).ready(function(){
+       $(".button-collapse").sideNav();
+    });
+
+  </script>
+</footer>
+
 
 </div>

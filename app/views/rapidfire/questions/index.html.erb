@@ -1,8 +1,7 @@
 
 <h2>
-  Questions
-  <%= link_to "질문 만들기", new_question_group_question_path(@question_group) %>
-</h2>
+  <%= @question_group.name %>
+ </h2>
 <hr/>
 <table>
   <colgroup>
@@ -11,7 +10,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th>Question</th>
+      <th>질문 목록</th>
       <th></th>
     </tr>
   </thead>
@@ -20,4 +19,5 @@
    
   </tbody>
   </table>
-   <a href="/" class="btn btn-primary btn-lg" role="button" style="float: left;">뒤로 가기</a>
+   <%= link_to "<button class='btn btn-primary btn buttons' style='margin-top:10px; margin-right:5px; width:150px; height:30px;'>새 질문 등록</button>".html_safe, new_question_group_question_path(@question_group) %>
+  <a href="/" class="btn btn-default" role="button" style="margin-top:10px; width:150px; height:30px;">뒤로 가기</a>

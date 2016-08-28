@@ -2,6 +2,8 @@
 class CreateRapidfireAnswerGroups < ActiveRecord::Migration
   def change
     create_table :rapidfire_answer_groups do |t|
+      # t.integer :user_id #답변한 user 저장
+      
       t.references :question_group
       t.references :user, polymorphic: true
 

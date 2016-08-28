@@ -1,7 +1,47 @@
 <div id="js-json-results"></div>
 <script>
-  
   var charts = new ResultChart("#{question_group.id}");
-  charts.render();
-
+  charts.render();        
 </script>
+
+
+<html>
+  <% @question_group_results.each do |result| %>
+    <% if result.results.is_a?(Array) %>
+      <% result.results.each do |answer| %>
+       <%= result.question.question_text %>
+      <% end %>
+    
+      <head>
+        <%else if result.results.is_a?(Hash) %>
+     
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+         google.charts.load('current', {'packages':['corechart']});
+         google.charts.setOnLoadCallback(drawChart);
+         
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+               ['option', 'count'],
+               <%- result.results.each do |option, count| %>
+                            ["<%=option%>",<%=count%>],
+              <% end %>
+            ]);
+            var options = {
+              title: '<%= result.question.question_text %>'
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+            
+          }
+           
+        </script>
+         
+          
+        <div id="piechart" style="width:800px; height: 500px;"></div>
+        <% end %>
+       
+      </head>
+       <% end %> 
+<% end %>
+</html>

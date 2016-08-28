@@ -13,10 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ 
+.indexpage{
+  background-image: url('https://s3.ap-northeast-2.amazonaws.com/firstbucket0/uploads/1472380553LHEBWCRO.png');
+  background-size: cover;
+}
+
 .border-form-div {
   max-width: 300px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
+  padding: 20px;
+  margin: 0 auto;
   background-color: #fff;
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 5px;
@@ -30,14 +36,20 @@
 .border-form-div .checkbox {
   margin-bottom: 10px;
 }
+
 .border-form-div input[type="text"],
 .border-form-div input[type="email"],
 .border-form-div input[type="password"] {
   font-size: 16px;
   height: auto;
   margin-bottom: 15px;
-  padding: 7px 9px;
+  padding: 7px;
 }
+
+.border-form-div actions {
+  width: 100%;
+}
+
 
 select {
     -webkit-border-radius:4px;
@@ -48,3 +60,4 @@ select {
     appearance:none;
     cursor:pointer;
 }
+

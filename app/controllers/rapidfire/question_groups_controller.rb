@@ -1,17 +1,20 @@
 module Rapidfire
   class QuestionGroupsController < Rapidfire::ApplicationController
-    before_filter :authenticate_administrator!, except: :index
-    # respond_to :html, :js
+    before_filter :authenticate_administrator!, :except => [:index]
+    respond_to :html  
     # respond_to :json, only: :results
     include ApplicationHelper
     
     def index
       @posts = QuestionGroup.order('created_at DESC').paginate :page => params[:page]
       @my_question_groups= QuestionGroup.where(:user_id => current_user.id)
+      
+      @my_answer_groups = AnswerGroup.where(:user_id => current_user.id)
+     
       @question_groups = QuestionGroup.all.reverse
       respond_with(@question_groups)
     end
-    
+
     
     def new
       @question_group = QuestionGroup.new

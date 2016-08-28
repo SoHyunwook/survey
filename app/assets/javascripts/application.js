@@ -15,3 +15,4 @@
 //= require Chart
 //= require result-chart
 //= require_tree ./templates
+//= require chartkick

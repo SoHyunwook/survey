@@ -1,11 +1,11 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %> 
-  
  <%= f.label :answer_text, answer.question.question_text %> 
- <%= f.fields_for :answer_text do |af| %> 
+ <%= f.fields_for :answer_text do |af| %> <br>
    <%- answer.question.options.each do |option| %> 
      <%= af.label option do %> 
-       <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %> 
-       <%= option %> 
+       <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
+       <%= option %>
      <% end %> 
+     <br>
    <% end %> 
  <% end %> 

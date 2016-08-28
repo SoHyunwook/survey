@@ -1,28 +1,59 @@
-<div class="border-form-div" style="margin-right: 15%; margin-top: 10%">
-<h2>품앗이</h2>
+<body class="indexpage">
+<div class="container">
+<div class="border-form-div" style="margin-top:3%; margin-right: 5%; margin-bottom:5%; background-color:white;">
+<h2 style="text-align:center;">로그인</h2><br>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, placeholder: "email", :style => "width:100%;" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: "password", :style => "width:100%;" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :"아이디 기억하기" %>
     </div>
   <% end -%>
 
-  <div class="actions" align="right">
-    <%= f.submit "로그인하기",:class => "btn btn-primary" %>
-  </div>
-<% end %>
+  <div class="actions">
+    <%= f.submit "로그인",:class => "btn btn-primary buttons", :style => "width:100%; margin-bottom:5px;" %> <br>
+   </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+
+   <%= link_to "<button class='btn btn-primary btn buttons' style='width:100%;'>회원가입</button>".html_safe, new_registration_path(resource_name) %><br />
+   <%= render "devise/shared/links" %>
 </div>
+</div>
+  </body>
+  
+<footer class="page-footer" style="background-color:white; opacity:0.5; margin-top:20px;">
+  <div class="container" style=" margin-left:12%;">
+     <p align = "left"><a href="http://likelion.net/"><img src="/assets/images/logo.JPG" alt="Responsive image" width="70" height="70"></a>
+    <h6 class="black-text" style="padding-bottom: 10px; font-size:13px; line-height: 1.5em;">
+               품앗이    |    멋쟁이 사자처럼 2016 4th Hackathon
+        <br>멋쟁이 사자처럼 4기 박정은 소현욱 정여진 정유진<br>
+        <br>메일 : <a href="mailto:mail">email</a>
+
+  </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <h6 class="grey-text text-base" style="margin-bottom: 10px; font-size:12px;">
+        © 2016 Copyright 품앗이, All rights reserved.</h6>
+      </div>
+    </div>
+  
+
+  <!--자바스크립트-->
+  <script>
+    $( document ).ready(function(){
+       $(".button-collapse").sideNav();
+    });
+
+  </script>
+  </footer>
+

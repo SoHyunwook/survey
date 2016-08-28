@@ -1,4 +1,4 @@
-<h3><%= question_group.new_record? ? "New Group" : "Edit Group" %></h3>
+<h3><%= question_group.new_record? ? "새 설문 등록" : "기존 설문 수정" %></h3>
 
 
 <%= form_for question_group do |f| %>
@@ -11,15 +11,14 @@
   <% end %>
   
   <div class="input-field col s6">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :style => "width:250px; margin-bottom:10px;" %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :writer, :value => current_user.username %>
   </div>
  
   
-  <%= f.submit 'new title',:class => "btn btn-primary" %>
-  <a href="/" class="btn btn-default" role="button">뒤로 가기</a>
+  <%= f.submit '등록하기',:class => "btn btn-primary", :style => "margin-right:5px; width:120px; height:30px;" %>
+  <a href="/" class="btn btn-default" role="button" style="width:120px; height:30px;">뒤로 가기</a>
 
  
 <% end %>

@@ -1,8 +1,7 @@
-
 module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!
-    # respond_to :html, :js
+    respond_to :html, :js
     before_filter :find_question_group!
     before_filter :find_question!, :only => [:edit, :update, :destroy]
     
@@ -25,6 +24,7 @@ module Rapidfire
     
     def edit
       @question = QuestionForm.new(:question => @question)
+      @question_group_name = @question_group.name
       respond_with(@question)
     end
     
@@ -45,6 +45,7 @@ module Rapidfire
     end
     
     private
+    
     def save_and_redirect(params, on_error_key)
       @question_form = QuestionForm.new(params)
       @question_form.save
