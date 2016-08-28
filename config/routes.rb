@@ -1,7 +1,10 @@
 
 
 Rails.application.routes.draw do
-
+  
+  get 'test' => 'home#test'
+  get 'bondy' => 'home#bondy'
+  
   namespace :rapidfire do
   get 'survey_result/makesurvey'
   end

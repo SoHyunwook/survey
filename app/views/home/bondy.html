@@ -1,0 +1,375 @@
+<!-- Start of main content -->
+	<div class="container">
+
+		<main id="htlfndr-main-content" role="main">
+			<div class="row htlfndr-user-tabs htlfndr-credit-card-page">
+				
+				<div class="htlfndr-user-person-navigation-wrapper col-sm-4 col-md-3">
+					<div class="htlfndr-user-person-navigation">
+						<div class="htlfndr-user-avatar">
+							<img src="http://placehold.it/130x130" alt="user avatar"/>
+						</div>
+						<h3 class="htlfndr-user-name"><%= current_user.username %></h3>
+						<% if current_user.sign_in_count < 10 %>
+							<h6 class="htlfndr-user-membership">Bronze</h6>
+						<% elsif current_user.sign_in_count < 20 %>
+							<h6 class="htlfndr-user-membership">Silver</h6>
+						<% elsif current_user.sign_in_count < 30 %>
+							<h6 class="htlfndr-user-membership">Gold</h6>
+						<% elsif current_user.sign_in_count < 40 %>
+							<h6 class="htlfndr-user-membership">Platinum</h6>
+						<% elsif current_user.sign_in_count < 50 %>
+							<h6 class="htlfndr-user-membership">Diamond</h6>
+						<% elsif current_user.sign_in_count > 49 %>
+							<h6 class="htlfndr-user-membership">Original Cheese</h6>
+						<% end %>
+						
+						
+	
+						<ul role="tablist">
+							<!--<li><a href="#htlfndr-user-tab-1"><i class="fa fa-user"></i> personal info</a></li>-->
+							<li><a href="#htlfndr-user-tab-2"><i class="fa fa-heart-o"></i> wishlist</a></li>
+							<li><a href="#htlfndr-user-tab-3"><i class="fa fa-wrench"></i> settings</a></li>
+						</ul>
+					</div><!-- .htlfndr-user-person-navigation -->
+				</div><!-- .htlfndr-user-person-navigation-wrapper -->
+				
+				<div class="htlfndr-user-panel col-md-8 col-sm-8 htlfndr-setting-page" id="htlfndr-user-tab-2">
+					<div class="htlfndr-setting">
+						
+							<h2>My <b>Score</b></h2>
+						<div class="row htlfndr-counters">
+							<div class="col-md-3 col-sm-6">
+								<div class="htlfndr-counter-block">
+										<div class="htlfndr-icon-holder">
+												<h2 class='test_type'>TOEIC</h2>
+											<!--<i class="fa fa-plane"></i>-->
+										</div>
+									<dl class="htlfndr-counter-numbers">
+										<dt> <%=current_user.toeic_score%> </dt>
+										<dd>score</dd>
+									</dl>
+								</div><!-- .htlfndr-counter-block -->
+							</div>
+							<div class="col-md-3 col-sm-6">
+								<div class="htlfndr-counter-block">
+									<div class="htlfndr-icon-holder">
+										<h2 class='test_type'>TOEFL</h2>
+										<!--<i class="fa fa-building-o"></i>-->
+									</div>
+									<dl class="htlfndr-counter-numbers">
+										<dt><%=current_user.toefl_score%></dt>
+										<dd>score</dd>
+									</dl>
+								</div><!-- .htlfndr-counter-block -->
+							</div>
+							<div class="col-md-3 col-sm-6">
+								<div class="htlfndr-counter-block">
+									<div class="htlfndr-icon-holder">
+										<h2 class='test_type'>TEPS</h2>
+										<!--<i class="fa fa-globe"></i>-->
+									</div>
+									<dl class="htlfndr-counter-numbers">
+										<dt><%= current_user.teps_score%></dt>
+										<dd>score</dd>
+									</dl>
+								</div><!-- .htlfndr-counter-block -->
+							</div>
+							<div class="col-md-3 col-sm-6">
+								<div class="htlfndr-counter-block">
+									<div class="htlfndr-icon-holder">
+										<h2 class='test_type'>토스</h2>
+										<!--<i class="fa fa-map-marker"></i>-->
+									</div>
+									<dl class="htlfndr-counter-numbers">
+										<dt><%=current_user.tos_level%></dt>
+										<dd>level</dd>
+									</dl>
+								</div><!-- .htlfndr-counter-block -->
+							</div>
+						</div><!-- .row.htlfndr-counters -->
+					<!--</div>-->
+					
+				<!--</div><!-- #htlfndr-user-tab-1 -->
+				
+				<!--<div class="htlfndr-user-panel col-md-8 col-sm-8" id="htlfndr-user-tab-2">-->
+				<!--	<div class="htlfndr-setting">-->
+							<hr>
+							
+							<h2>My <b>Wishlist</b></h2>
+							<% if current_user.follow_count == 0 %>
+								<h1>목록이 없습니다!</h1>
+							<% else %>
+									<table class="result_table">
+									<colgroup>
+								      <col width="7%">
+								      <col width="10%">
+								      <col width="23%">
+								      <col width="27%">
+								      <col width="10%">
+								      <col width="13%">
+								      <col width="10%">
+								    </colgroup>
+								    <thead>
+								    <tr>
+								        <th scope="cols">과목군</th>
+								        <th scope="cols">위치(학원)</th>
+								        <th scope="cols">시간</th>
+								        <th scope="cols">강의명</th>
+								        <th scope="cols">강사</th>
+								        <th scope="cols">가격</th>
+								        <th scope="cols">찜</th>
+								    </tr>
+								    </thead>
+								    
+								    <tbody>
+										<!--< current_user.all_following.each do |l| %>-->
+										<% @hackers.each do |l| %>
+											<% if l.followed_by?(current_user) == true %>
+											<tr>
+												<% name = ["해커스"] %>
+												<% loc = ["강남", "종로"] %>
+												<% subject = ["토플", "토익", "토스"] %>
+												<% level = ["기초","필수","입문","기본","중급","정규","실전"] %>
+												<% week = ["주 5일반", "월수금반", "화목금반", "주말반"] %>
+												<% time = ["아침", "오전", "오후", "저녁"] %>
+												
+												<td><%= subject[l.subject-1] %></td>
+												<td><%= name[l.name-1] %><br>(<%= loc[l.loc-1] %>)</td>
+												<td><%= l.day %> <br> (<%= week[l.week-1] %>) </td>
+												<td><a href="http://www.hackers.ac<%= l.link %>" target="_blank"><%= l.title %></a></td>
+												<td><%= l.teacher %></td>
+												<td><%= l.price %></td>
+									    		<td>
+									    			<% if current_user %>
+														<% if l.followed_by?(current_user) == true %>
+															<%= link_to image_tag("/assets/zzim_ok.gif"),   {:type => "unwish", :lecture_id => l.id}, {:class => 'zzim zzimok'}  %>
+														<% end %>
+													<% else %>
+														<a href="#" data-toggle="modal" data-target="#layerpop"><img class="zzim" src="/assets/zzim_not.gif"></div></a>
+													<% end %>
+									    		</td>
+											</tr>  
+											<% end %>
+										<% end %>
+								    </tbody>
+									</table>
+							<% end %>
+							
+							
+							<!--<div class="htlfndr-hotel-post clearfix">-->
+							<!--	<a class="glyphicon glyphicon-remove" href="#" data-toggle="modal" data-target="#remove-page"></a>-->
+							<!--	<a href="hotel-page-v1.html" class="htlfndr-hotel-thumbnail pull-left">-->
+							<!--		<img src="/assets/hackers.gif" alt="pic" style='height:200px; width:200px;' />-->
+							<!--	</a>-->
+							<!--		<div class="htlfndr-hotel-description">-->
+							<!--			<div class="htlfndr-description-content">-->
+							<!--			<div class="htlfndr-rating-stars" data-rating="5">-->
+							<!--				<i class="fa fa-star htlfndr-star-color"></i>&nbsp;-->
+							<!--				<i class="fa fa-star htlfndr-star-color"></i>&nbsp;-->
+							<!--				<i class="fa fa-star htlfndr-star-color"></i>&nbsp;-->
+							<!--				<i class="fa fa-star htlfndr-star-color"></i>&nbsp;-->
+							<!--				<i class="fa fa-star htlfndr-star-color"></i>&nbsp;-->
+							<!--				<p class="htlfndr-hotel-reviews">(<span>188</span> reviews)</p>-->
+										<!--</div><!-- .htlfndr-rating-stars -->
+									<!--	<h2 class="htlfndr-entry-title"><a href="hotel-page-v1.html">오후 기초영어종합반</a></h2>-->
+										
+									<!--	<h5 class="htlfndr-hotel-location"><a href="#"><i class="fa fa-map-marker"></i>종로 해커스</a></h5>-->
+									<!--	<p class="htlfndr-last-booking">수업시간: <span>월/수/금</span> 10:00~14:00</p>-->
+									<!--</div><!-- .htlfndr-description-content -->
+									
+									<!--<span class="htlfndr-from">From</span>-->
+									<!--<div class="htlfndr-hotel-price">-->
+									<!--	 <span class="htlfndr-cost">$ 100</span> -->
+									<!--</div><!-- .htlfndr-hotel-price -->
+									<!--<span class="htlfndr-per-night">per night</span>-->
+								<!--</div><!-- .htlfndr-hotel-description 
+								<a href="hotel-page-v1.html" role="button" class="htlfndr-select-hotel-button">select</a>
+							</div><!-- .htlfndr-hotel-post 
+							<div class="htlfndr-hotel-post clearfix">
+								<a class="glyphicon glyphicon-remove" href="#" data-toggle="modal" data-target="#remove-page"></a>
+								<a href="hotel-page-v3.html" class="htlfndr-hotel-thumbnail pull-left">
+									<img src="/assets/pagoda1.jpeg" alt="pic" style='height:200px; width:200px;' />
+								</a>
+									<div class="htlfndr-hotel-description">
+										<div class="htlfndr-description-content">
+										<div class="htlfndr-rating-stars" data-rating="3">
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star "></i>&nbsp;
+											<i class="fa fa-star "></i>&nbsp;
+											<p class="htlfndr-hotel-reviews">(<span>188</span> reviews)</p>
+										</div><!-- .htlfndr-rating-stars 
+										<h2 class="htlfndr-entry-title"><a href="hotel-page-v3.html">[집중관리반]스타토익800+ 1개월 완성반</a></h2>
+										
+										<h5 class="htlfndr-hotel-location"><a href="#"><i class="fa fa-map-marker"></i>강남 파고다</a></h5>
+										<p class="htlfndr-last-booking">수업시간: <span>월/화/수/목/금</span>10:00~11:20</p>
+									</div><!-- .htlfndr-description-content 
+									
+									<span class="htlfndr-from">From</span>
+									<div class="htlfndr-hotel-price">
+										 <span class="htlfndr-cost">$ 250</span> 
+									</div><!-- .htlfndr-hotel-price 
+									<span class="htlfndr-per-night">per night</span>
+								</div><!-- .htlfndr-hotel-description 
+								<a href="hotel-page-v3.html" role="button" class="htlfndr-select-hotel-button">select</a>
+							</div><!-- .htlfndr-hotel-post 
+							<div class="htlfndr-hotel-post special-offer clearfix">
+								<a class="glyphicon glyphicon-remove" href="#" data-toggle="modal" data-target="#remove-page"></a>
+								<a href="hotel-page-v2.html" class="htlfndr-hotel-thumbnail pull-left">
+									<img src="http://placehold.it/300x175" alt="pic" />
+								</a>
+									<div class="htlfndr-hotel-description">
+										<div class="htlfndr-description-content">
+										<div class="htlfndr-rating-stars" data-rating="4">
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star htlfndr-star-color"></i>&nbsp;
+											<i class="fa fa-star"></i>&nbsp;
+											<p class="htlfndr-hotel-reviews">(<span>128</span> reviews)</p>
+										</div><!-- .htlfndr-rating-stars 
+										<h2 class="htlfndr-entry-title"><a href="hotel-page-v2.html">Ruzzini Palace hotel</a></h2>
+										
+										<h5 class="htlfndr-hotel-location"><a href="#"><i class="fa fa-map-marker"></i>paris france</a></h5>
+										<p class="htlfndr-last-booking">Lastest booking: <span>14</span> hours ago</p>
+									</div><!-- .htlfndr-description-content 
+									
+									<span class="htlfndr-from">From</span>
+									<div class="htlfndr-hotel-price">
+										 <span class="htlfndr-cost">$ 150</span> 
+									</div><!-- .htlfndr-hotel-price 
+									<span class="htlfndr-per-night">per night</span>
+								</div><!-- .htlfndr-hotel-description 
+								<a href="hotel-page-v2.html" role="button" class="htlfndr-select-hotel-button">select</a>
+							</div><!-- .htlfndr-hotel-post 
+							
+					<p class="htlfndr-load_more text-right"><a href="#">Load more +</a></p> -->
+					</div>
+				</div><!-- .htlfndr-user-tabs-4-->
+				
+				<div class="htlfndr-user-panel col-md-8 col-sm-8 htlfndr-setting-page" id="htlfndr-user-tab-3">
+					<div class="htlfndr-setting">
+						<h2>Change <b>Personal Infomation</b></h2>
+						<!--<form class="htlfndr-form-setting" id="htlfndr-settings-form" action='/home/user_page' method="post">-->
+							<div class="row2">
+									<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+									  <%= f.error_notification %>
+									
+									  <div class="form-inputs">
+									  	
+									    
+									    <div class = "field">
+									    <%= f.label :Username %> <br/>
+									    <%= f.text_field :username, :class => "htlfndr-input"%><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :Password %> <br/>
+									    <%= f.password_field :password, :class => "htlfndr-input", required: false%><br/> 
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :Password_Confirmation %> <br/>
+									    <%= f.password_field :password_confirmation, :class => "htlfndr-input", required: false%><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :Current_Password %> <br/>
+									    <%= f.password_field :current_password, :class => "htlfndr-input", required: true %><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :TOEIC %> <br/>
+									    <%= f.text_field :toeic_score, :class => "htlfndr-input", required: false %><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :TOEFL %> <br/>
+									    <%= f.text_field :toefl_score, :class => "htlfndr-input", required: false %><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :TEPS %> <br/>
+									    <%= f.text_field :teps_score, :class => "htlfndr-input", required: false %><br/>
+									    </div>
+									    
+									    <div class = "field">
+									    <%= f.label :TOEIC_SPEAKING %> <br/>
+									    <%= f.text_field :tos_level, :class => "htlfndr-input", required: false %><br/>
+									    </div>
+									    
+									  </div>
+									
+									  <div class="form-actions">
+									    <%= f.button :submit, "Update", :class => "btn-primary"  %>
+									  </div>
+									<% end %>
+									
+									<h3>Cancel my account</h3>
+									
+									<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+									
+									<%= link_to "Back", :back %>
+								<!--이하의 코드는 원래 템플릿에 적용되던 html-->
+								<!--<div class="col-md-5 htlfndr-form-setting-cols">-->
+								<!--	<label for="settings-name" class="">Name</label><br>-->
+								<!--	<input id="settings-name" class="htlfndr-input" type="text" name="settings-name" value="<%#= current_user.username %>"><br>-->
+								<!--	<label for="settings-phone" class="">TOEIC</label><br>-->
+								<!--	<input id="settings-phone" class="htlfndr-input" type="text" name="settings_toeic" placeholder="SCORE"><br>-->
+								<!--	<label for="settings-adress" class="">TEPS</label><br>-->
+								<!--	<input id="settings-adress" class="htlfndr-input" type="text" name="settings-adress" placeholder="SCORE"><br>-->
+								<!--</div>-->
+								<!--<div class="col-md-5 htlfndr-form-setting-cols">-->
+								<!--	<label for="settings-email" class="">E-mail</label><br>-->
+								<!--	<input id="settings-email" class="htlfndr-input" type="text" name="settings-email" value=<%#= current_user.email %> disabled><br>-->
+								<!--	<label for="settings-subject" class="">TOEFL</label><br>-->
+								<!--	<input id="settings-subject" class="htlfndr-input" type="text" name="settings-home-airport" placeholder="SCORE"><br>-->
+								<!--	<label for="settings-city" class="">TOEIC SEPAKING</label><br>-->
+								<!--	<input id="settings-city" class="htlfndr-input" type="text" name="settings-city" placeholder="LEVEL"><br>-->
+								<!--</div>-->
+							</div>
+							<!--<input type="submit" value="Save changes" class="btn-primary">						-->
+						<!--</form>-->
+						
+						
+						<!--<h2>Change <b>Password</b></h2>-->
+						<!--<form  class="htlfndr-change-setting" id="htlfndr-settings-pass" method="post">-->
+						<!--	<div class="row2">-->
+						<!--		<div class="col-md-5 htlfndr-form-setting-cols">-->
+									<!--<label for="settings-cur-pass" class="">Current Password</label><br>-->
+									<!--<input id="settings-cur-pass" class="htlfndr-input" type="text" name="settings-cur-pass" ><br>-->
+									<!--<label for="settings-new-pass" class="">New Password</label><br>-->
+									<!--<input id="settings-new-pass" class="htlfndr-input" type="text" name="settings-new-pass" ><br>-->
+									<!--<label for="settings-new-pass-again" class="">New Password Again</label><br>-->
+									<!--<input id="settings-new-pass-again" class="htlfndr-input" type="text" name="settings-new-pass-again" ><br>-->
+									
+						<!--		</div>-->
+						<!--		<div class="col-md-5 htlfndr-form-setting-cols">-->
+						<!--		</div>-->
+						<!--	</div>-->
+						<!--	<input type="submit" value="Save password" class="btn-primary">						-->
+						<!--</form>-->
+						<!--<form class="htlfndr-form-setting" id="htlfndr-settings-form" action='/home/user-page' method="post">-->
+						<!--	<div class="row2">-->
+						<!--		<div class="col-md-5 htlfndr-form-setting-cols">-->
+						<!--			<label for="settings-cur-pass" class="">Current Password</label><br>-->
+						<!--			<input id="settings-cur-pass" class="htlfndr-input" type="password" name="settings-cur-pass" ><br>-->
+						<!--			<label for="settings-new-pass" class="">New Password</label><br>-->
+						<!--			<input id="settings-new-pass" class="htlfndr-input" type="password" name="settings-new-pass" ><br>-->
+						<!--			<label for="settings-new-pass-again" class="">New Password Again</label><br>-->
+						<!--			<input id="settings-new-pass-again" class="htlfndr-input" type="password" name="settings-new-pass-again" ><br>-->
+						<!--		</div>-->
+						<!--		<div class="col-md-5 htlfndr-form-setting-cols">-->
+						<!--		</div>-->
+						<!--	</div>-->
+						<!--	<input type="submit" value="Save Password" class="btn-primary">						-->
+						<!--</form>-->
+						
+					</div><!--.htlfndr-setting -->
+				</div><!-- .htlfndr-user-tabs-5 -->
+				
+			
+			</div> <!-- .row -->
+		</main><!-- #htlfndr-main-content -->

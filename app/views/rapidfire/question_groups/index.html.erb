@@ -1,3 +1,87 @@
+
+  <div class="col-sm-4 col-md-2 user_tab">
+  <% if user_signed_in? %>
+    <div align="right">
+      <table>
+        <tr> <td>이름 : <%= current_user.username %> </td></tr>
+        <tr> <td> 이메일 :  <%= current_user.email %> </td></tr>
+        <tr> <td> 포인트 : <%= current_user.point %> </td></tr>
+        <tr> <td> 설문 : <%= current_user.postnum %>회 등록  |   
+       <%= current_user.submitnum %>회 참여 </td></tr>
+      </table>
+
+      <br>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+             내가 등록한 설문 <span class="caret"></span>
+          </button>
+         <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% if @my_question_groups.empty? %> 
+            <li>설문이 없습니다!</li>
+          <% else %>
+            <% @my_question_groups.each do |p| %>
+              <li><a href="/rapidfire/question_groups/<%= p.id %>/results"><%= p.name %></a> </li>
+     	      <% end %>
+     	    <% end %>
+     		 </ul> 
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div class="col-xs-12 col-md-10">
+    <table class="survey_list">
+     
+    <colgroup>
+    <col width="15%">
+    <col width="63%">
+    <col width="22%">
+    </colgroup> 
+   
+    <tbody>
+      <% @posts.each do |question_group| %>
+        <% if can_administer? %>
+        <tr>
+          <td style="text-align:center"><%= question_group.id%></td>
+        
+          <td>
+          <span class="survey_name"><%= question_group.name%>
+            <% if current_user.id == question_group.user_id %>
+              <% if can_administer? %>
+                <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, question_group_questions_path(question_group), :class => 'survey-icon' %>
+                
+                <%= link_to '<i class="fa fa-trash"></i>'.html_safe, [question_group], method: :delete, :class => 'survey-icon' %>
+              <% end %>
+            <% end %>  
+          </span><br>
+          <p class="survey_info">
+            <span><%= question_group.writer %></span>
+            <span><i class="fa fa-calendar" aria-hidden="true"></i><%= question_group.created_at.in_time_zone("Asia/Seoul").strftime("%Y-%m-%d %H:%M") %></span>
+          </p>
+          </td>
+          
+          <td>
+            <ul class="horizontal-list">
+              <% if current_user.id == question_group.user_id %>
+                <% if can_administer? %>
+                  <%= link_to "결과 확인", [:results, question_group], :class => 'survey_btn' %>
+                <% end %>
+              <% else %>
+                <%= link_to "설문 참여", new_question_group_answer_group_path(question_group), :class => 'survey_btn' %>
+              <% end %>  
+            </ul>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+    </table>
+</div>
+
+
+
+  
+
 <div class="container">
 
   <% if user_signed_in? %>
@@ -13,7 +97,7 @@
       <br>
         <div class="input-group-btn">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-             내 설문목록<span class="caret"></span>
+             내가 등록한 설문 <span class="caret"></span>
           </button>
          <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <% if @my_question_groups.empty? %> 
@@ -29,7 +113,7 @@
     <br>
       <div class="input-group-btn">
      		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-             내가 참여한 설문<span class="caret"></span>
+             내가 참여한 설문 <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <% @my_answer_groups.each do |p| %>
@@ -45,7 +129,8 @@
   <% end %>
   <hr/>
   
-  <table class="table table-condensed table-hover">
+
+  <table class="table table-condensed table-hover result_table">
    <colgroup>
     <col width="70">
     <col width="200">
@@ -71,7 +156,7 @@
     <col width="80">
     <col width="80">
     </colgroup>
-  
+
     <% @posts.each do |question_group| %>
 
     <% if can_administer? %>
@@ -83,7 +168,7 @@
         <ul class="horizontal-list">
           <% if current_user.id == question_group.user_id %>
             <% if can_administer? %>
-            <li><%= link_to "질문 추가",question_group_questions_path(question_group) %></li>
+            <li><%= link_to "질문 추가", question_group_questions_path(question_group) %></li>
             <li><%= link_to "결과 확인", [:results, question_group] %></li>
             <li><%= link_to "설문 삭제", [question_group], method: :delete %></li>
             <% end %>
@@ -114,7 +199,7 @@
 </div>
 
 
-<footer class="page-footer" style="opacity: 0.5; marrgin-top:15px;">
+<footer class="page-footer" style="opacity: 0.5; margin-top:15px;">
   <div class="container">
     <h6 class="black-text" style="padding-bottom: 20px; font-size:13px; line-height: 1.5em;">
                품앗이    |    멋쟁이 사자처럼 2016 4th Hackathon
@@ -141,3 +226,5 @@
 
 
 </div>
+</div>
+
