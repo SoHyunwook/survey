@@ -1,32 +1,68 @@
 
-  <div class="col-sm-4 col-md-2 user_tab">
-  <% if user_signed_in? %>
-    <div align="right">
-      <table>
-        <tr> <td>이름 : <%= current_user.username %> </td></tr>
-        <tr> <td> 이메일 :  <%= current_user.email %> </td></tr>
-        <tr> <td> 포인트 : <%= current_user.point %> </td></tr>
-        <tr> <td> 설문 : <%= current_user.postnum %>회 등록  |   
-       <%= current_user.submitnum %>회 참여 </td></tr>
-      </table>
+<div class="col-sm-4 col-md-2 user_box">
+      <% if user_signed_in? %>
+      <div class="user_box_top">
+        <span class="user_name"><%= current_user.username %></span><br>
+        <span class="user_email"><%= current_user.point %> 포인트</span><br>
+        
+        
+        <!--<a href="/users/edit"><span class="user_edit">edit</i></a>-->
+      </div>
+      
+      <!--<div class="user_box_bottom">-->
+        
+      <!--  <div class="user_point"><= current_user.point %><br><span class="point">p</span></div>-->
+      <!--  <div class="user_point"><= current_user.postnum %><br><i class="fa fa-pencil-square" aria-hidden="true"></i></div>-->
+      <!--  <div class="user_point"><= current_user.submitnum %><br><i class="fa fa-bookmark" aria-hidden="true"></i></div>-->
+      <!--</div>-->
+      
+      <!--<div class="user_box_bottom">-->
+        <!--<span class="user_point">포인트 : <= current_user.point %></span><br>-->
+      <!--  <span class="user_write">-->
+      <!--      <i class="fa fa-pencil-square" aria-hidden="true"></i>작성한설문-->
+      <!--      <span style="text-align:right"><= current_user.postnum %></span>-->
+      <!--  </span>-->
+      <!--</div>-->
+      
+      <!--<div class="user_box_bottom">-->
+        <!--<span class="user_point">포인트 : <= current_user.point %></span><br>-->  
+      <!--  <span class="user_do">-->
+      <!--      <i class="fa fa-bookmark" aria-hidden="true"></i>참여한 설문-->
+      <!--      <= current_user.submitnum %></span>-->
+      <!--</div>-->
+        
 
-      <br>
-        <div class="input-group-btn">
+      
+        <div class="input-group-btn" style="border-bottom: 1px solid #00b7b6;">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-             내가 등록한 설문 <span class="caret"></span>
+             <i class="fa fa-pencil-square user-icon" aria-hidden="true"></i>등록한 설문 <%= current_user.postnum %> <span class="caret"></span>
           </button>
          <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <% if @my_question_groups.empty? %> 
-            <li>설문이 없습니다!</li>
-          <% else %>
             <% @my_question_groups.each do |p| %>
               <li><a href="/rapidfire/question_groups/<%= p.id %>/results"><%= p.name %></a> </li>
-     	      <% end %>
      	    <% end %>
      		 </ul> 
     </div>
+    <br>
+    
+      <div class="input-group-btn">
+     		<button type="button" class="btn btn-default dropdown-toggle aaa" data-toggle="dropdown" aria-expanded="false">
+             <i class="fa fa-bookmark user-icon" aria-hidden="true"></i>참여한 설문 <%= current_user.submitnum %> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% @my_answer_groups.each do |p| %>
+         	  <% @question_groups.each do |l| %>
+         	    <% if l.id == p.question_group_id %>
+         	      <li><a href="/rapidfire/question_groups/<%= l.id %>/results"><%= l.name %></a></li>
+         	    <% end %>
+         	  <% end %>
+           <% end %>
+     		</ul> 
+     	</div>
+     		 
   <% end %>
-  </div>
+  
+</div>
 </div>
 
 <div class="col-xs-12 col-md-10">
@@ -34,8 +70,8 @@
      
     <colgroup>
     <col width="15%">
-    <col width="63%">
-    <col width="22%">
+    <col width="55%">
+    <col width="30%">
     </colgroup> 
    
     <tbody>

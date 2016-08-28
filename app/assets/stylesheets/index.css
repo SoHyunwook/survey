@@ -9,7 +9,7 @@
     position: relative;
     height: 60px;
     min-height: 60px;
-    background-color: #005580;
+    background-color: #00b7b6;
     vertical-align: middle;
 }
 
@@ -103,11 +103,11 @@
 }
 
 .survey_info > span i {
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 a.survey_btn {
-    background-color: #2f609c;
+    background-color: #00b7b6;
     color: white;
     padding: 9px 40px;
     border-radius: 4px;
@@ -139,4 +139,95 @@ a.survey-icon {
 .survey_list tr:hover span > a{
   color: white;
   transition: none;
+}
+
+
+
+
+/*user box*/
+.user_box {
+    font-family: 'Spoqa Han Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    border: 1px solid #00b7b6;
+    border-radius: 3px;
+    padding: 0px !important;
+    border-radius: 3px;
+}
+
+.user_box_top {
+    text-align: center;
+    /*margin-top: 33px;*/
+    /*margin-bottom: 33px;*/
+    background-color: #00b7b6;
+    padding: 27px;
+}
+
+.user_name {
+    font-size: 32px;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: white;
+}
+
+.go_setting{
+  margin-left: 2px;
+  color:white;
+  font-size: 20px !important;
+}
+
+.user_email {
+    font-size: 14px;
+    color: white;
+}
+
+.user_box_bottom {
+    color: white;
+    background-color: #00b7b6;
+    padding: 20px;
+    margin: 3px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.user_point {
+    display: inline-block;
+}
+
+.user-icon {
+    padding-right: 6px;
+    font-size: 21px !important;
+}
+
+
+
+button.btn.btn-default.dropdown-toggle {
+    font-family: 'Spoqa Han Sans', sans-serif;
+    font-weight: 400;
+    color: #00b7b6;
+    background-color: transparent;
+    width: 100%;
+    padding: 16px 0px;
+    font-size: 18px;
+    border-radius: 0;
+    border: none;
+    margin-left: 0 !important;
+}
+
+ul.dropdown-menu.dropdown-menu-right {
+    width: 100%;
+    font-family: 'Spoqa Han Sans', sans-serif;
+}
+ul.dropdown-menu.dropdown-menu-right > li > a {
+    font-weight: 400;
+    color: #00b7b6;
+    font-size: 16px;
+}
+
+.dropdown-menu>li>a:hover {
+    background-color: #f9f9f9;
+}
+
+.aaa {
+  margin-top: -19px !important;
 }
